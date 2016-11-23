@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Angular Form ngif</title>
+
+    <script src="vendor.js"></script>
+    <script src="shared.js"></script>
+    <script type="text/javascript">
+        let app = angular.module('app', ['shared']);
+        app.directive('scopeSpy', function() {
+            return {
+                scope: true,
+                controller: function($scope) {
+
+                    $scope.fields1 = ['name', 'email'];
+                    $scope.fields2 = ['address', 'city', 'country'];
+                    $scope.model = {};
+                }
+            }
+        });
+    </script>
+
+</head>
+<body ng-app="app" class="container-fluid" scope-spy>
+
+
+
+    <div class="row">
+
+        <form name="registration" ng-submit="submit()" novalidate class="col-sm-12 col-md-6 offset-md-3 card card-block">
+            <shared-child-form fields="fields1" model="model.fields1" name="fields1" debug="true">
+
+
+                <shared-boolean-box name="sendPresents" model="model.sendPresents" text="'send me presents'">
+
+                    <shared-child-form fields="fields2" model="model.fields2" name="fields2" debug="true">
+                    </shared-child-form>
+
+                </shared-boolean-box>
+
+            </shared-child-form>
+        </form>
+
+        <!--
+        <shared-form-status form="registration"></shared-form-status>
+        <shared-form-status form="registration.fields1"></shared-form-status>
+        <shared-form-status form="registration.fields1.fields2"></shared-form-status>
+        -->
+
+    </div>
+
+    <shared-form-viewer></shared-form-viewer>
+
+</body>
+</html>

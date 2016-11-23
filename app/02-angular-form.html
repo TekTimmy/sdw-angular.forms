@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Angular Form</title>
+
+    <script src="vendor.js"></script>
+
+    <script type="text/javascript">
+        let app = angular.module('app', []);
+
+        app.directive('evScopeSpy', function() {
+            return {
+                restrict: 'A',
+                scope: true,
+                controller: function ($scope) {
+                    console.log('controller started!');
+                    $scope.$watchCollection(function () {
+                        return $scope;
+                    }, function (newValue) {
+                        console.log('change in $scope detected: ', newValue);
+                    }, true);
+                }
+            }
+        });
+    </script>
+</head>
+<body ng-app="app" ev-scope-spy="" class="container-fluid">
+
+    <div class="row">
+
+        <form name="login" novalidate class="col-sm-12 col-md-6 offset-md-3 card card-block">
+
+            <div class="form-group">
+                <label for="username">username:</label>
+                <input name="username" class="form-control"
+                       id="username" type="text" ng-model="username">
+                <small class="form-text text-muted">In most cases your E-Mail address.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="password">password:</label>
+                <input name="password" class="form-control"
+                       id="password" type="password" ng-model="password">
+            </div>
+
+            <div class="text-xs-right">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+        </form>
+
+    </div>
+
+</body>
+</html>

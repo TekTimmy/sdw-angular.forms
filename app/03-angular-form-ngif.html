@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Angular Form ngif</title>
+
+    <script src="vendor.js"></script>
+    <script type="text/javascript">
+        let app = angular.module('app', []);
+        app.directive('scopeSpy', function() {
+            return {
+                scope: true,
+                controller: function($scope) {
+
+                    $scope.fields = [
+                        'email',
+                        'name',
+                        'hobbies'
+                    ];
+
+                    $scope.model = {};
+
+                    $scope.submit = function() {
+                        console.log('submitting model: ', $scope.model);
+                    };
+
+                    $scope.$watchCollection(function() {
+                        return $scope;
+                    }, function() {
+                        console.log(`### $scope.registration: ${typeof $scope.registration}` +
+                            ` ### $scope.registration.email: ${typeof $scope.registration.email}` +
+                            ` ### $scope.registration.name: ${typeof $scope.registration.name}` +
+                            ` ### $scope.registration.hobbies: ${typeof $scope.registration.hobbies}` +
+                            ` ### $scope.registration.sendPresents: ${typeof $scope.registration.sendPresents}` +
+                            ` ### $scope.registration.deliveryAddress: ${typeof $scope.registration.deliveryAddress}`);
+                    }, true);
+
+                }
+            }
+        });
+    </script>
+
+</head>
+<body ng-app="app" class="container-fluid" scope-spy>
+
+    <div class="row">
+
+        <form name="registration" ng-submit="submit()" novalidate class="col-sm-12 col-md-6 offset-md-3 card card-block">
+
+            <div ng-repeat="field in fields track by $index">
+                <div class="form-group">
+                    <label for="{{field}}">{{field}}:</label>
+                    <input name="{{field}}" class="form-control"
+                           id="{{field}}" type="text" ng-model="model[field]">
+                </div>
+            </div>
+
+            <label class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" ng-model="model.sendPresents" name="sendPresents">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">send me presents</span>
+            </label>
+
+            <!-- differences between ng-if and ng-show ? -->
+            <div class="form-group" ng-if="model.sendPresents">
+                <label for="deliveryAddress">delivery address:</label>
+                <input name="deliveryAddress" class="form-control"
+                       id="deliveryAddress" type="text" ng-model="model.deliveryAddress">
+                <small class="form-text text-muted">The address the presents should be delivered to.</small>
+            </div>
+
+            <div class="text-xs-right">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
+        </form>
+
+    </div>
+
+</body>
+</html>
