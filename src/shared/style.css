@@ -4,3 +4,9 @@
 .animate.ng-hide {
     opacity: 0;
 }
+.animate.ng-show {
+    opacity: 0;
+}
+.greyed {
+    color: lightgrey;
+}

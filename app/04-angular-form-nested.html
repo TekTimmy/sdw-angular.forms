@@ -19,6 +19,10 @@
                     $scope.fields1 = ['name', 'email'];
                     $scope.fields2 = ['address', 'city', 'country'];
                     $scope.model = {};
+
+                    $scope.submit = function(form) {
+                        console.log('submitting model', $scope.model, form);
+                    }
                 }
             }
         });
@@ -27,11 +31,9 @@
 </head>
 <body ng-app="app" class="container-fluid" scope-spy>
 
-
-
     <div class="row">
 
-        <form name="registration" ng-submit="submit()" novalidate class="col-sm-12 col-md-6 offset-md-3 card card-block">
+        <form name="registration" novalidate ng-submit="submit(this)" class="col-sm-12 col-md-6 offset-md-3 card card-block">
             <shared-child-form fields="fields1" model="model.fields1" name="fields1" debug="true">
 
 
@@ -44,12 +46,6 @@
 
             </shared-child-form>
         </form>
-
-        <!--
-        <shared-form-status form="registration"></shared-form-status>
-        <shared-form-status form="registration.fields1"></shared-form-status>
-        <shared-form-status form="registration.fields1.fields2"></shared-form-status>
-        -->
 
     </div>
 

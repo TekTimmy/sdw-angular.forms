@@ -8,7 +8,7 @@ let sharedApp = angular.module('shared', ['ngAnimate']);
 
 sharedApp.directive('sharedBooleanBox', require('./directives/BooleanBox'));
 sharedApp.directive('sharedChildForm', require('./directives/ChildForm'));
-sharedApp.directive('sharedFormStatus', require('./directives/FormStatus'));
 sharedApp.directive('sharedFormViewer', require('./directives/FormViewer'));
+sharedApp.directive('sharedPasswordPolicy', require('./directives/PasswordPolicy'));
 
 module.exports = sharedApp;

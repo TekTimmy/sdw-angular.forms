@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Angular Form ngif</title>
+
+    <script src="vendor.js"></script>
+    <script src="shared.js"></script>
+    <script type="text/javascript">
+        let app = angular.module('app', ['shared']);
+        app.directive('scopeSpy', function() {
+            return {
+                scope: true,
+                controller: function($scope) {
+                    $scope.model = {};
+
+                    $scope.submit = function(form) {
+                        console.log('submitting model', $scope.model, form);
+                    }
+                }
+            }
+        });
+    </script>
+
+</head>
+<body ng-app="app" class="container-fluid" scope-spy>
+
+    <div class="row">
+
+        <form name="registration" ng-submit="submit(this)" novalidate class="col-sm-12 col-md-6 offset-md-3 card card-block">
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" name="email" class="form-control" id="email"
+                       placeholder="user@example.com" ng-model="model.email">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control" id="password"
+                       ng-model="model.password"
+                       shared-password-policy="">
+
+                <div class="alert alert-danger" role="alert"
+                     ng-show="registration.password.$dirty && registration.password.$invalid">
+                    your password does <strong>not</strong> match the following <strong>password policies</strong>:
+                    <ul>
+                        <li ng-show="registration.password.$error.length">must be at least 6 characters long.</li>
+                        <li ng-show="registration.password.$error.lowercase">must contain at least 1 lowercase letter.</li>
+                        <li ng-show="registration.password.$error.uppercase">must contain at least 1 uppercase letter.</li>
+                        <li ng-show="registration.password.$error.number">must contain at least 1 number.</li>
+                    </ul>
+                </div>
+
+                <div class="alert alert-success"
+                     ng-show="registration.password.$dirty && registration.password.$valid">
+                    your password matches the <strong>password policies</strong>.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="passwordRepeat">Password Repeat</label>
+                <input type="password" name="passwordRepeat" class="form-control" id="passwordRepeat"
+                       ng-model="model.passwordRepeat"
+                       shared-password-policy="">
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <shared-form-viewer></shared-form-viewer>
+
+</body>
+</html>
