@@ -17,8 +17,7 @@
 
                     $scope.fields = [
                         'email',
-                        'name',
-                        'hobbies'
+                        'name'
                     ];
 
                     $scope.model = {};
@@ -30,12 +29,14 @@
                     $scope.$watchCollection(function() {
                         return $scope;
                     }, function() {
-                        console.log(`### $scope.registration: ${typeof $scope.registration}` +
-                            ` ### $scope.registration.email: ${typeof $scope.registration.email}` +
-                            ` ### $scope.registration.name: ${typeof $scope.registration.name}` +
-                            ` ### $scope.registration.hobbies: ${typeof $scope.registration.hobbies}` +
-                            ` ### $scope.registration.sendPresents: ${typeof $scope.registration.sendPresents}` +
-                            ` ### $scope.registration.deliveryAddress: ${typeof $scope.registration.deliveryAddress}`);
+                        console.log(`
+                            ### $scope.registration: ${typeof $scope.registration}
+                            ### $scope.registration.email: ${typeof $scope.registration.email}
+                            ### $scope.registration.name: ${typeof $scope.registration.name}
+                            ### $scope.registration.hobbies: ${typeof $scope.registration.hobbies}
+                            ### $scope.registration.sendPresents: ${typeof $scope.registration.sendPresents}
+                            ### $scope.registration.deliveryAddress: ${typeof $scope.registration.deliveryAddress}
+                            `);
                     }, true);
 
                 }

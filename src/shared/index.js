@@ -6,9 +6,9 @@ require('./style.css');
 
 let sharedApp = angular.module('shared', ['ngAnimate']);
 
-sharedApp.directive('sharedBooleanBox', require('./directives/BooleanBox'));
-sharedApp.directive('sharedChildForm', require('./directives/ChildForm'));
-sharedApp.directive('sharedFormViewer', require('./directives/FormViewer'));
-sharedApp.directive('sharedPasswordPolicy', require('./directives/PasswordPolicy'));
+sharedApp.directive('booleanBox', require('./directives/BooleanBox'));
+sharedApp.directive('childForm', require('./directives/ChildForm'));
+sharedApp.directive('formViewer', require('./directives/FormViewer'));
+sharedApp.directive('passwordPolicy', require('./directives/PasswordPolicy'));
 
 module.exports = sharedApp;

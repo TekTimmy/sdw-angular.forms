@@ -7,9 +7,6 @@ module.exports = function() {
             model: '=',
             fields: '='
         },
-        link: function($scope) {
-            $scope.form = $scope[$scope.name];
-        },
         template: `
         <ng-form name="{{name}}">
             <div ng-repeat="field in fields track by $index">

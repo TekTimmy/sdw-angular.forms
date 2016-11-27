@@ -10,22 +10,33 @@
     <script src="vendor.js"></script>
 
     <script type="text/javascript">
-        let app = angular.module('app', []);
+        {
+            let app = angular.module('app', []);
 
-        app.directive('evScopeSpy', function() {
-            return {
-                restrict: 'A',
-                scope: true,
-                controller: function ($scope) {
-                    console.log('controller started!');
-                    $scope.$watchCollection(function () {
-                        return $scope;
-                    }, function (newValue) {
-                        console.log('change in $scope detected: ', newValue);
-                    }, true);
+            app.directive('evScopeSpy', ['$timeout', function ($timeout) {
+                return {
+                    restrict: 'A',
+                    scope: true,
+                    controller: ['$scope', function ($scope) {
+                        console.log('controller started! loginFormController: ', $scope.login);
+
+                        $timeout(function() {
+                            console.log('controller timeout! loginFormController: ', $scope.login);
+                        });
+
+                        $scope.$watchCollection(function () {
+                            return $scope;
+                        }, function (newValue) {
+                            console.log('change in $scope detected: ', newValue);
+                        }, true);
+
+                    }],
+                    link: function (scope) {
+                        console.log('linker started! loginFormController: ', scope.login);
+                    }
                 }
-            }
-        });
+            }]);
+        }
     </script>
 </head>
 <body ng-app="app" ev-scope-spy="" class="container-fluid">

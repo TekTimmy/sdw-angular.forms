@@ -11,21 +11,27 @@
     <script src="shared.js"></script>
     <script type="text/javascript">
         let app = angular.module('app', ['shared']);
-        app.directive('scopeSpy', function() {
+        app.directive('scopeSpy', ['$timeout', function($timeout) {
             return {
                 scope: true,
                 controller: function($scope) {
-
                     $scope.fields1 = ['name', 'email'];
                     $scope.fields2 = ['address', 'city', 'country'];
                     $scope.model = {};
 
                     $scope.submit = function(form) {
                         console.log('submitting model', $scope.model, form);
-                    }
+                    };
+
+                    /* simulate fields that depend on AJAX request
+
+                    $timeout(function() {
+                        $scope.showOptionalForm = true;
+                    }, 4000);
+                    */
                 }
             }
-        });
+        }]);
     </script>
 
 </head>
@@ -33,23 +39,34 @@
 
     <div class="row">
 
-        <form name="registration" novalidate ng-submit="submit(this)" class="col-sm-12 col-md-6 offset-md-3 card card-block">
-            <shared-child-form fields="fields1" model="model.fields1" name="fields1" debug="true">
+        <form name="registration" novalidate ng-submit="submit(registration)" class="col-sm-12 col-md-6 offset-md-3 card card-block">
+            <child-form fields="fields1" model="model.fields1" name="fields1">
 
+                <boolean-box name="sendPresents" model="model.sendPresents" text="'send me presents'">
 
-                <shared-boolean-box name="sendPresents" model="model.sendPresents" text="'send me presents'">
+                    <child-form fields="fields2" model="model.fields2" name="fields2">
+                    </child-form>
 
-                    <shared-child-form fields="fields2" model="model.fields2" name="fields2" debug="true">
-                    </shared-child-form>
+                </boolean-box>
 
-                </shared-boolean-box>
+            </child-form>
 
-            </shared-child-form>
+            <!-- simulate fields that depend on AJAX request
+            <child-form ng-if="showOptionalForm" fields="['optionalField1', 'optionalField2']"
+                        model="model.optionalFields" name="optionalForm">
+
+            </child-form>
+            -->
+
+            <div class="text-xs-right">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+
         </form>
 
     </div>
 
-    <shared-form-viewer></shared-form-viewer>
+    <form-viewer></form-viewer>
 
 </body>
 </html>
