@@ -32,4 +32,10 @@
 * simulate form that depends on ajax request.
 
 ## 05 Angular Forms Validation
+* helper directives:
+  * ngRequired
+  * ngDisabled
+  * ngMessages / ngMessage
+  * ngMinlength / ngMaxlength
+  * 
 * excercise time
